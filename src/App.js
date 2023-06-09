@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import NavBar from './components/Navbar/Navbar';
-import ItemListContainer from './components/ItemListContainer/ItemListContainer';
-import ItemCount from './components/ItemCount/ItemCount';
+import Navbar from './components/Navbar/Navbar';
 import { getProducts } from './stock';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Contacto from './paginas/Contacto';
+import Productos from './paginas/Productos';
+import Informacion from './paginas/Informacion';
+import Inicio from './paginas/Inicio';
+import Item from './components/Item/Item';
+import Detalle from './paginas/Detalle'
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -20,8 +25,16 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
-     <ItemListContainer greeting={'Bienvenidos a Estuardo'} products={products} />
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/productos" element={<Productos />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/informacion" element={<Informacion />} />
+          <Route path='/detail/:id' element={<Detalle />}/>
+        </Routes>
+      </Router>
     </div>
   );
 }
